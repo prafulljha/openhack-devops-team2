@@ -5,11 +5,15 @@ variables:
   value: apis/poi/tests/UnitTests/UnitTests.csproj
 trigger:
   branches:
-    exclude:
+    include:
     - master
   paths:
     include:
-    - apis/poi/**
+    - apis/poi/*
+  pr:
+    branches:
+      exclude:
+      - master
 name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
