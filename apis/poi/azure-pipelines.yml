@@ -48,8 +48,8 @@ jobs:
       TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
 - job: createworkitem
   displayName: Create work item on failure
-  dependsOn: rununittest
-  condition: failed() # this job will only run if rununittest fails
+  dependsOn: Job_1
+  condition: failed() # this job will only run if Job_1 fails
   steps:
     - task: CreateWorkItem@1
       displayName: Create work item on failure
