@@ -2,7 +2,7 @@
 # POI Service
 
 ## Overview
-This is the POI API.
+This is the POI API.Changing for challenge 2.
 
 ## Build the Application
 
