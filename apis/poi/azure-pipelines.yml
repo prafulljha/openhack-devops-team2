@@ -5,7 +5,7 @@ variables:
   value: apis/poi/tests/UnitTests/UnitTests.csproj
 trigger:
   branches:
-    include:
+    exclude:
     - master
   paths:
     include:
