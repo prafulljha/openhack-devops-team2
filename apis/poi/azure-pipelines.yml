@@ -1,17 +1,49 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
-trigger:
-- main
-
-pool:
-  vmImage: 'ubuntu-latest'
-
 variables:
-  buildConfiguration: 'Release'
-
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- name: BuildParameters.RestoreBuildProjects
+  value: apis/poi/web/poi.csproj
+- name: BuildParameters.TestProjects
+  value: apis/poi/tests/UnitTests/UnitTests.csproj
+trigger:
+  branches:
+    exclude:
+    - master
+  paths:
+    include:
+    - apis/poi/**
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: master
+jobs:
+- job: Job_1
+  displayName: Agent job 1
+  pool:
+    vmImage: ubuntu-16.04
+  steps:
+  - checkout: self
+  - task: DotNetCoreCLI@2
+    displayName: Restore
+    inputs:
+      command: restore
+      projects: $(BuildParameters.RestoreBuildProjects)
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      projects: $(BuildParameters.RestoreBuildProjects)
+      arguments: --configuration $(BuildConfiguration)
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: test
+      projects: $(BuildParameters.TestProjects)
+      arguments: --configuration $(BuildConfiguration)
+  - task: PublishBuildArtifacts@1
+    displayName: Publish Artifact
+    condition: succeededOrFailed()
+    enabled: False
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+      TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+...
