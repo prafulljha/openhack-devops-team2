@@ -10,10 +10,6 @@ trigger:
   paths:
     include:
     - apis/poi/*
-  pr:
-    branches:
-      exclude:
-      - master
 name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
