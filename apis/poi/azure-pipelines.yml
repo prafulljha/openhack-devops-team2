@@ -50,7 +50,7 @@ jobs:
     displayName: Build an image
     inputs:
       repository: devopsoh/api-poi
-      containerRegistry: openhacku787but6acr.azurecr.io
+      containerRegistry: openhack_realTeam2
       tags: $(date:yyyyMMdd)$(rev:.r)
       command: build
       Dockerfile: apis/poi/web/Dockerfile
