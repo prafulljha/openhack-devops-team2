@@ -77,9 +77,9 @@ jobs:
         scriptLocation: 'inlineScript'
         inlineScript: |
           echo "Checking Health..."
-          echo "Changing directory to apis/poi/web..."
+          echo "Changing directory to apis/poi..."
           cd "apis/poi"
-          sh check_poi_endpoint
+          sh ./check_poi_endpoint
   - task: AzureAppServiceManage@0
     condition: succeeded()
     displayName: Manage Azure App Service-Swapping
