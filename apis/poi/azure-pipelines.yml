@@ -69,17 +69,11 @@ jobs:
       resourceGroupName: 'openhacku787but6rg'
       slotName: 'staging'
       containers: "openhacku787but6acr.azurecr.io/devopsoh/api-poi:$(Build.BuildId)"
-  - task: AzureCLI@2
-    displayName: 'Check Health'
+  - task: CmdLine@2
+    displayName: 'Health Check'
     inputs:
-        azureSubscription: 'openhack_realTeam2'
-        scriptType: 'bash'
-        scriptLocation: 'inlineScript'
-        inlineScript: |
-          echo "Checking Health..."
-          echo "Changing directory to apis/poi/web..."
-          cd "apis/poi"
-          sh check_poi_endpoint
+      script: 'sh ./check_poi_endpoint'
+      workingDirectory: apis/poi
   - task: AzureAppServiceManage@0
     condition: succeeded()
     displayName: Manage Azure App Service-Swapping
