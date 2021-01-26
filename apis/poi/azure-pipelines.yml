@@ -74,6 +74,8 @@ jobs:
       apis/poi/check_poi_endpoint.sh
     displayName: 'Health Check'
     failOnStderr: true
+    env:
+      ENDPOINT: 'https://openhacku787but6poi-staging.azurewebsites.net/api/healthcheck/poi'
   - task: AzureAppServiceManage@0
     condition: succeeded()
     displayName: Manage Azure App Service-Swapping
