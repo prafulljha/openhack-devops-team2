@@ -4,14 +4,13 @@ declare hasUrl=""
 declare endpoint
 declare -i status200count=0
 healthcheck() {
-    declare url=$1
-    result=$(curl -i $url 2>/dev/null | grep HTTP/2)
+    result=$(curl -i $ENDPOINT 2>/dev/null | grep HTTP/2)
     echo $result
 }
 echo 'Polling endpoint: ' $ENDPOINT
 for i in {1..12}
 do
-  result=`healthcheck $ENDPOINT`
+  result=`healthcheck`
   echo "---> $result" 
   declare status
   if [[ -z $result ]]; then 
