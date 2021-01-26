@@ -46,6 +46,12 @@ jobs:
       command: test
       projects: $(BuildParameters.TestProjects)
       arguments: --configuration $(BuildConfiguration)
+  - task: Docker@2
+    displayName: Build an image
+    inputs:
+      repository: openhacku787but6acr.azurecr.io/devopsoh/api-poi:$(date:yyyyMMdd)$(rev:.r)
+      command: build
+      Dockerfile: apis/poi/web/Dockerfile
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifact
     condition: succeededOrFailed()
