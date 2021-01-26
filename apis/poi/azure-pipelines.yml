@@ -56,6 +56,7 @@ jobs:
       Dockerfile: apis/poi/web/Dockerfile
 - job: Job_2
   displayName: Push Container and Deploy
+  dependsOn: [Job_1]
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   pool:
     vmImage: ubuntu-16.04
