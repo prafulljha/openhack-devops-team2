@@ -51,7 +51,7 @@ jobs:
     inputs:
       repository: devopsoh/api-poi
       containerRegistry: 'AZCR connection1'
-      tags: $(date:yyyyMMdd)$(rev:.r)
+      tags: '$(Build.BuildId)'
       command: build
       Dockerfile: apis/poi/web/Dockerfile
   - task: PublishBuildArtifacts@1
