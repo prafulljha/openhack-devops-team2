@@ -72,7 +72,7 @@ jobs:
   - bash: |
       chmod +x apis/poi/poi_health_check.sh 
       apis/poi/poi_health_check.sh
-    displayName: 'Health Check'
+    displayName: 'Health Check - Staging'
     failOnStderr: true
     env:
       ENDPOINT: 'https://openhacku787but6poi-staging.azurewebsites.net/api/healthcheck/poi'
@@ -85,6 +85,30 @@ jobs:
       WebAppName: 'openhacku787but6poi'
       ResourceGroupName: 'openhacku787but6rg'
       SourceSlot: 'staging'
+  - bash: |
+      chmod +x apis/poi/poi_health_check.sh 
+      apis/poi/poi_health_check.sh
+    displayName: 'Health Check - Production'
+    failOnStderr: true
+    env:
+      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi'
+  - task: AzureAppServiceManage@0
+    condition: failed()
+    displayName: Manage Azure App Service - Rollback
+    inputs:
+      azureSubscription: 'openhack_realTeam2'
+      Action: 'Swap Slots'
+      WebAppName: 'openhacku787but6poi'
+      ResourceGroupName: 'openhacku787but6rg'
+      SourceSlot: 'staging'
+  - bash: |
+      chmod +x apis/poi/poi_health_check.sh 
+      apis/poi/poi_health_check.sh
+    condition: succeeded() 
+    displayName: 'Verify Rollback'
+    failOnStderr: true
+    env:
+      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi'
 - job: createworkitem
   displayName: Create work item on failure
   dependsOn: Job_1
