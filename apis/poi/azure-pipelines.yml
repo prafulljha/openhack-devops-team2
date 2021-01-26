@@ -52,7 +52,7 @@ jobs:
       repository: devopsoh/api-poi
       containerRegistry: 'AZCR connection1'
       tags: '$(Build.BuildId)'
-      command: build
+      command: 'buildAndPush'
       Dockerfile: apis/poi/web/Dockerfile
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifact
