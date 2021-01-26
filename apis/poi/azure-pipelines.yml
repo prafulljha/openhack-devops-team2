@@ -72,7 +72,7 @@ jobs:
   - task: CmdLine@2
     displayName: 'Health Check'
     inputs:
-      script: 'sh ./check_poi_endpoint'
+      script: 'sh ./check_poi_endpoint.sh'
       workingDirectory: apis/poi
   - task: AzureAppServiceManage@0
     condition: succeeded()
