@@ -3,14 +3,20 @@ variables:
   value: apis/poi/web/poi.csproj
 - name: BuildParameters.TestProjects
   value: apis/poi/tests/UnitTests/UnitTests.csproj
+pr:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - apis/poi
 trigger:
   branches:
     include:
     - master
   paths:
     include:
-    - apis/poi/*
-name: $(date:yyyyMMdd)$(rev:.r)
+    - apis/poiname: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
   - repository: self
