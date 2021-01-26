@@ -4,7 +4,9 @@ declare hasUrl=""
 declare endpoint
 declare -i status200count=0
 healthcheck() {
+    echo >&2 'DEBUG:' $ENDPOINT
     result=$(curl -i $ENDPOINT 2>/dev/null | grep HTTP/2)
+    echo >&2 'DEBUG:' $result
     echo $result
 }
 echo 'Polling endpoint: ' $ENDPOINT
