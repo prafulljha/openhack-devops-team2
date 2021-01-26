@@ -52,22 +52,14 @@ jobs:
       repository: devopsoh/api-poi
       containerRegistry: 'AZCR connection1'
       tags: '$(Build.BuildId)'
-      command: 'build'
+      command: 'buildAndPush'
       Dockerfile: apis/poi/web/Dockerfile
 - job: Job_2
-  displayName: Push Container and Deploy
+  displayName: Deploy
   dependsOn: [Job_1]
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   steps:
   - checkout: self      
-  - task: Docker@2
-    displayName: Push the image
-    inputs:
-      repository: devopsoh/api-poi
-      containerRegistry: 'AZCR connection1'
-      tags: '$(Build.BuildId)'
-      command: 'push'
-      Dockerfile: apis/poi/web/Dockerfile
   - task: AzureWebAppContainer@1
     displayName: Azure App Service Deploy POI
     inputs:
