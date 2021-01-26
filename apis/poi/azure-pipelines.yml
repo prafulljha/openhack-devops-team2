@@ -3,13 +3,20 @@ variables:
   value: apis/poi/web/poi.csproj
 - name: BuildParameters.TestProjects
   value: apis/poi/tests/UnitTests/UnitTests.csproj
+pr:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - apis/poi
 trigger:
   branches:
     include:
     - master
   paths:
     include:
-    - apis/poi/*
+    - apis/poi
 name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
@@ -46,4 +53,14 @@ jobs:
     inputs:
       PathtoPublish: $(build.artifactstagingdirectory)
       TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+- job: createworkitem
+  displayName: Create work item on failure
+  dependsOn: Job_1
+  condition: failed() # this job will only run if Job_1 fails
+  steps:
+    - task: CreateWorkItem@1
+      displayName: Create work item on failure
+      inputs:
+        workItemType: 'Issue'
+        title: 'Build $(Build.BuildId) failed'
 ...
