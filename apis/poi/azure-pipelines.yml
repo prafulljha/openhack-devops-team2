@@ -70,7 +70,8 @@ jobs:
       slotName: 'staging'
       containers: "openhacku787but6acr.azurecr.io/devopsoh/api-poi:$(Build.BuildId)"
   - task: AzureCLI@2
-      inputs:
+    displayName: 'Check Health'
+    inputs:
         azureSubscription: 'openhack_realTeam2'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
@@ -79,7 +80,6 @@ jobs:
           echo "Changing directory to apis/poi/web..."
           cd "apis/poi"
           sh check_poi_endpoint
-          displayName: 'Check Health'
   - task: AzureAppServiceManage@0
     condition: succeeded()
     displayName: Manage Azure App Service-Swapping
