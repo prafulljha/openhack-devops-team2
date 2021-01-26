@@ -1,0 +1,23 @@
+trigger:
+  branches:
+    include:
+    - nick
+  paths:
+    include:
+    - apis/poi
+pool:
+  vmImage: ubuntu-16.04
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: master
+jobs:
+- job: Job_1
+  displayName: Test the status check shell script
+  steps:
+  - checkout: self
+  - bash: |
+    chmod +x /api/poi/check_poi_endpoint.sh
+    ./check_poi_endpoint.sh
