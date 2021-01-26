@@ -63,7 +63,7 @@ jobs:
       deployToSlotOrASE: true
       resourceGroupName: 'openhacku787but6rg'
       slotName: 'staging'
-      containers: "openhacku787but6acr.azureacr.io/devopsoh/api-poi:$(Build.BuildId)"
+      containers: "openhacku787but6acr.azurecr.io/devopsoh/api-poi:$(Build.BuildId)"
   - task: PublishBuildArtifacts@1
     displayName: Publish Artifact
     condition: succeededOrFailed()
