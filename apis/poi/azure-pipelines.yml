@@ -81,4 +81,11 @@ jobs:
       inputs:
         workItemType: 'Issue'
         title: 'Build $(Build.BuildId) failed'
+    - task: AzureAppServiceManage@0
+      inputs:
+        azureSubscription: 'openhack_realTeam2'
+        Action: 'Swap Slots'
+        WebAppName: 'openhacku787but6poi'
+        ResourceGroupName: 'openhacku787but6rg'
+        SourceSlot: 'staging'
 ...
