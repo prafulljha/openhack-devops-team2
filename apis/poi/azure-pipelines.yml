@@ -16,7 +16,8 @@ trigger:
     - master
   paths:
     include:
-    - apis/poiname: $(date:yyyyMMdd)$(rev:.r)
+    - apis/poi
+  name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
   - repository: self
