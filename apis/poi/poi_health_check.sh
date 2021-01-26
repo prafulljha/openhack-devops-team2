@@ -5,7 +5,7 @@ declare endpoint
 declare -i status200count=0
 healthcheck() {
     echo >&2 'DEBUG:' $ENDPOINT
-    result=$(curl -i $ENDPOINT 2>/dev/null | grep HTTP/2)
+    result=$(curl -i $ENDPOINT 2>/dev/null)
     echo >&2 'DEBUG:' $result
     echo $result
 }
