@@ -3,7 +3,7 @@ declare -i duration=10
 declare hasUrl=""
 declare endpoint
 declare -i status200count=0
-endpoint="https://openhack1poi-staging.azurewebsites.net/api/healthcheck/poi"
+endpoint="https://openhacku787but6poi-staging.azurewebsites.net/api/healthcheck/poi"
 healthcheck() {
     declare url=$1
     result=$(curl -i $url 2>/dev/null | grep HTTP/2)
