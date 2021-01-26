@@ -64,13 +64,13 @@ jobs:
       resourceGroupName: 'openhacku787but6rg'
       slotName: 'staging'
       containers: "openhacku787but6acr.azurecr.io/devopsoh/api-poi:$(Build.BuildId)"
-  - task: PublishBuildArtifacts@1
-    displayName: Publish Artifact
-    condition: succeededOrFailed()
-    enabled: False
+  - task: AzureAppServiceManage@0
     inputs:
-      PathtoPublish: $(build.artifactstagingdirectory)
-      TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+      azureSubscription: 'openhack_realTeam2'
+      Action: 'Swap Slots'
+      WebAppName: 'openhacku787but6poi'
+      ResourceGroupName: 'openhacku787but6rg'
+      SourceSlot: 'staging'
 - job: createworkitem
   displayName: Create work item on failure
   dependsOn: Job_1
@@ -81,11 +81,5 @@ jobs:
       inputs:
         workItemType: 'Issue'
         title: 'Build $(Build.BuildId) failed'
-    - task: AzureAppServiceManage@0
-      inputs:
-        azureSubscription: 'openhack_realTeam2'
-        Action: 'Swap Slots'
-        WebAppName: 'openhacku787but6poi'
-        ResourceGroupName: 'openhacku787but6rg'
-        SourceSlot: 'staging'
+
 ...
