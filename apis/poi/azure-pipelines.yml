@@ -70,8 +70,8 @@ jobs:
       slotName: 'staging'
       containers: "openhacku787but6acr.azurecr.io/devopsoh/api-poi:$(Build.BuildId)"
   - bash: |
-      chmod +x apis/poi/check_poi_endpoint.sh 
-      apis/poi/check_poi_endpoint.sh
+      chmod +x apis/poi/poi_health_check.sh 
+      apis/poi/poi_health_check.sh
     displayName: 'Health Check'
     failOnStderr: true
     env:
