@@ -17,6 +17,8 @@ trigger:
   paths:
     include:
     - apis/poi
+pool:
+  vmImage: ubuntu-16.04
 name: $(date:yyyyMMdd)$(rev:.r)
 resources:
   repositories:
@@ -26,8 +28,6 @@ resources:
 jobs:
 - job: Job_1
   displayName: Build and Test Container
-  pool:
-    vmImage: ubuntu-16.04
   steps:
   - checkout: self
   - task: DotNetCoreCLI@2
@@ -58,8 +58,6 @@ jobs:
   displayName: Push Container and Deploy
   dependsOn: [Job_1]
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  pool:
-    vmImage: ubuntu-16.04
   steps:
   - checkout: self      
   - task: Docker@2
