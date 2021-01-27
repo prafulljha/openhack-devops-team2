@@ -30,6 +30,13 @@ jobs:
   displayName: Build and Test Container
   steps:
   - checkout: self
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'SonarCloud Connection'
+      organization: 'therealteam2'
+      scannerMode: 'MSBuild'
+      projectKey: 'sonar.team2'
+      projectName: 'project.team2'
   - task: DotNetCoreCLI@2
     displayName: Restore
     inputs:
@@ -40,7 +47,13 @@ jobs:
     inputs:
       projects: $(BuildParameters.RestoreBuildProjects)
       arguments: --configuration $(BuildConfiguration)
-  - task: DotNetCoreCLI@2
+  - task: SonarCloudAnalyze@1
+    displayName: Run Code Analysis
+  - task: SonarCloudPublish@1
+    displayName: Publish Quality Gate Result
+    inputs:
+      pollingTimeoutSec: '300'
+  - task: DotNetCoreCLI@2 
     displayName: Test
     inputs:
       command: test
