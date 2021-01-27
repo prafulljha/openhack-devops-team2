@@ -91,7 +91,7 @@ jobs:
     displayName: 'Health Check - Production'
     failOnStderr: true
     env:
-      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi'
+      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi_fail'
   - task: AzureAppServiceManage@0
     condition: failed()
     displayName: Manage Azure App Service - Rollback
