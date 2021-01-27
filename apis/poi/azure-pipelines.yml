@@ -91,7 +91,7 @@ jobs:
     displayName: 'Health Check - Production'
     failOnStderr: true
     env:
-      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi_fail'
+      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi'
 - job: Job_3
   displayName: Rollback production to staging
   dependsOn: [Job_2]
