@@ -75,7 +75,7 @@ jobs:
     displayName: 'Health Check - Staging'
     failOnStderr: true
     env:
-      ENDPOINT: 'https://openhacku787but6poi-staging.azurewebsites.net/api/healthcheck/poi_fail'
+      ENDPOINT: 'https://openhacku787but6poi-staging.azurewebsites.net/api/healthcheck/poi'
   - task: AzureAppServiceManage@0
     condition: succeeded()
     displayName: Manage Azure App Service-Swapping
@@ -91,7 +91,7 @@ jobs:
     displayName: 'Health Check - Production'
     failOnStderr: true
     env:
-      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi'
+      ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi_fail'
   - task: AzureAppServiceManage@0
     condition: failed()
     displayName: Manage Azure App Service - Rollback
