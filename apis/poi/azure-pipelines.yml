@@ -54,6 +54,7 @@ jobs:
       tags: '$(Build.BuildId)'
       command: 'buildAndPush'
       Dockerfile: apis/poi/web/Dockerfile
+      arguments: '--build-arg current_build="$(Build.BuildId)'
 - job: Job_2
   displayName: Deploy
   dependsOn: [Job_1]

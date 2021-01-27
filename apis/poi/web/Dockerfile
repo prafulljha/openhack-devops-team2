@@ -23,7 +23,7 @@ WEB_PORT="8080" \
 WEB_SERVER_BASE_URI="http://0.0.0.0" \
 ASPNETCORE_ENVIRONMENT="Production" 
 
-RUN echo "BuildId in Dockerfile is " $Build.BuildId
+RUN echo "BuildId in Dockerfile is $current_build"
 
 COPY --from=build-env /app/out .
 
