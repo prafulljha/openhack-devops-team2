@@ -5,10 +5,11 @@ namespace poi.Models
 {
     public class Healthcheck
     {
+        public string buildId = Environment.GetEnvironmentVariable("Build.BuildId", Environment.VariableTarget.Process);
         public Healthcheck()
         {
             Message = "POI Service Healthcheck";
-            Status = "Healthy+test1";
+            Status = "Healthy; Build Id: " + buildId;
         }
         [Newtonsoft.Json.JsonProperty(PropertyName = "message")]
         public string Message {get;set;}
