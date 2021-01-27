@@ -92,9 +92,13 @@ jobs:
     failOnStderr: true
     env:
       ENDPOINT: 'https://openhacku787but6poi.azurewebsites.net/api/healthcheck/poi_fail'
+- job: Job_3
+  displayName: Rollback production to staging
+  dependsOn: [Job_2]
+  condition: failed() # this job will only run if Job_1 fails
+  steps:
   - task: AzureAppServiceManage@0
-    condition: failed()
-    displayName: Manage Azure App Service - Rollback
+    displayName: Swapping production to staging
     inputs:
       azureSubscription: 'openhack_realTeam2'
       Action: 'Swap Slots'
