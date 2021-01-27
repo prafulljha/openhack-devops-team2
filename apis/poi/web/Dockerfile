@@ -21,7 +21,9 @@ SQL_SERVER="changeme.database.windows.net" \
 SQL_DBNAME="mydrivingDB" \
 WEB_PORT="8080" \
 WEB_SERVER_BASE_URI="http://0.0.0.0" \
-ASPNETCORE_ENVIRONMENT="Production"
+ASPNETCORE_ENVIRONMENT="Production" 
+
+RUN echo "BuildId in Dockerfile is " $Build.BuildId
 
 COPY --from=build-env /app/out .
 
